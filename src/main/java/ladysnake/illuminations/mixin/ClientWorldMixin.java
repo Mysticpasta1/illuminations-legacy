@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.WritableLevelData;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,6 +33,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({ClientLevel.class})
 public abstract class ClientWorldMixin extends Level {
+    @Shadow public abstract void addParticle(ParticleOptions arg, double d, double e, double f, double g, double h, double i);
+
     protected ClientWorldMixin(WritableLevelData properties, ResourceKey<Level> registryRef, Holder<DimensionType> dimension, Supplier<ProfilerFiller> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
         super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
     }
@@ -59,6 +62,18 @@ public abstract class ClientWorldMixin extends Level {
         if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {
             ImmutableSet<IlluminationData> illuminationDataSet = (ImmutableSet)Illuminations.ILLUMINATIONS_BIOMES.get(biome);
             this.spawnParticles(pos, illuminationDataSet);
+        }
+
+        if(Illuminations.FIREFLY_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getFireflySpawnRate().spawnRate && Illuminations.FIREFLY.isPresent()) {
+            this.addParticle((ParticleOptions) Illuminations.FIREFLY.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+        }
+
+        if(Illuminations.GLOWWORM_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getGlowwormSpawnRate().spawnRate && Illuminations.GLOWWORM.isPresent()) {
+            this.addParticle((ParticleOptions) Illuminations.GLOWWORM.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+        }
+
+        if(Illuminations.PLANKTON_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getPlanktonSpawnRate().spawnRate && Illuminations.PLANKTON.isPresent()) {
+            this.addParticle((ParticleOptions) Illuminations.PLANKTON.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
         }
 
         if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate().spawnRate && Illuminations.EYES.isPresent()) {

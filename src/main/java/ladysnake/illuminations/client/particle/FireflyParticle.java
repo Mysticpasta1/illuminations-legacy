@@ -57,7 +57,7 @@ public class FireflyParticle extends TextureSheetParticle {
         } else {
             Holder<Biome> b = world.getBiome(new BlockPos(x, y, z));
             ResourceLocation biome = world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey((Biome)b.value());
-            int rgb = Config.getBiomeSettings(biome).fireflyColor();
+            int rgb = 0xFDDA0D;
             float[] hsb = Color.RGBtoHSB(rgb >> 16 & 255, rgb >> 8 & 255, rgb & 255, (float[])null);
             hsb[0] += (this.random.nextFloat() - 0.5F) * 30.0F / 360.0F;
             c = Color.getHSBColor(hsb[0], hsb[1], hsb[2]);

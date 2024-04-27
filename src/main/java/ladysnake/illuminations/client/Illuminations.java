@@ -354,25 +354,6 @@ public class Illuminations {
         loadPlayerCosmetics();
         ClientHelper.load();
         ImmutableMap.Builder<ResourceLocation, Set<IlluminationData>> biomeBuilder = ImmutableMap.builder();
-        Config.getBiomeSettings().forEach((biome, settings) -> {
-            ImmutableSet.Builder<IlluminationData> illuminationDataBuilder = ImmutableSet.builder();
-            illuminationDataBuilder.add(new IlluminationData(FIREFLY.get(), FIREFLY_LOCATION_PREDICATE, () -> {
-                return Config.getBiomeSettings(biome).fireflySpawnRate().spawnRate;
-            }));
-            if (settings.glowwormSpawnRate() != null) {
-                illuminationDataBuilder.add(new IlluminationData(GLOWWORM.get(), GLOWWORM_LOCATION_PREDICATE, () -> {
-                    return Config.getBiomeSettings(biome).glowwormSpawnRate().spawnRate;
-                }));
-            }
-
-            if (settings.planktonSpawnRate() != null) {
-                illuminationDataBuilder.add(new IlluminationData(PLANKTON.get(), PLANKTON_LOCATION_PREDICATE, () -> {
-                    return Config.getBiomeSettings(biome).planktonSpawnRate().spawnRate;
-                }));
-            }
-
-            biomeBuilder.put(biome, illuminationDataBuilder.build());
-        });
         ILLUMINATIONS_BIOME_CATEGORIES = biomeBuilder.build();
         ILLUMINATIONS_BIOMES = ImmutableMap.<ResourceLocation, Set<IlluminationData>>builder().put(new ResourceLocation("minecraft:soul_sand_valley"), ImmutableSet.of(new IlluminationData(WILL_O_WISP.get(), WISP_LOCATION_PREDICATE, () -> {
             return Config.getWillOWispsSpawnRate().spawnRate;
