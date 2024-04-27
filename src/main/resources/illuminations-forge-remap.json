@@ -1,0 +1,62 @@
+{
+  "mappings": {
+    "ladysnake/illuminations/mixin/jeb/FeatureRendererMixin": {
+      "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/render/VertexConsumer;": "Lnet/minecraft/client/renderer/MultiBufferSource;m_6299_(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;",
+      "renderModel": "Lnet/minecraft/client/renderer/entity/layers/RenderLayer;m_117376_(Lnet/minecraft/client/model/EntityModel;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFF)V"
+    },
+    "ladysnake/illuminations/mixin/jeb/LivingEntityRendererMixin": {
+      "getRenderLayer": "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;m_7225_(Lnet/minecraft/world/entity/LivingEntity;ZZZ)Lnet/minecraft/client/renderer/RenderType;"
+    },
+    "ladysnake/illuminations/mixin/PlayerEntityMixin": {
+      "tick": "Lnet/minecraft/world/entity/player/Player;m_8119_()V"
+    },
+    "ladysnake/illuminations/mixin/ParticleManagerMixin": {
+      "addBlockBreakParticles": "Lnet/minecraft/client/particle/ParticleEngine;m_107355_(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
+    },
+    "ladysnake/illuminations/mixin/TitleScreenMixin": {
+      "render": "Lnet/minecraft/client/gui/screens/TitleScreen;m_6305_(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V"
+    },
+    "ladysnake/illuminations/mixin/BlockMixin": {
+      "randomDisplayTick": "Lnet/minecraft/world/level/block/Block;m_214162_(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)V"
+    },
+    "ladysnake/illuminations/mixin/ClientWorldMixin": {
+      "addPlayer": "Lnet/minecraft/client/multiplayer/ClientLevel;m_104630_(ILnet/minecraft/client/player/AbstractClientPlayer;)V",
+      "Lnet/minecraft/world/biome/Biome;getParticleConfig()Ljava/util/Optional;": "Lnet/minecraft/world/level/biome/Biome;m_47562_()Ljava/util/Optional;",
+      "randomBlockDisplayTick": "Lnet/minecraft/client/multiplayer/ClientLevel;m_233612_(IIIILnet/minecraft/util/RandomSource;Lnet/minecraft/world/level/block/Block;Lnet/minecraft/core/BlockPos$MutableBlockPos;)V"
+    },
+    "ladysnake/illuminations/mixin/LivingEntityMixin": {
+      "onDeath": "Lnet/minecraft/world/entity/LivingEntity;m_6667_(Lnet/minecraft/world/damagesource/DamageSource;)V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "ladysnake/illuminations/mixin/jeb/FeatureRendererMixin": {
+        "Lnet/minecraft/client/render/VertexConsumerProvider;getBuffer(Lnet/minecraft/client/render/RenderLayer;)Lnet/minecraft/client/render/VertexConsumer;": "Lnet/minecraft/client/renderer/MultiBufferSource;m_6299_(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;",
+        "renderModel": "Lnet/minecraft/client/renderer/entity/layers/RenderLayer;m_117376_(Lnet/minecraft/client/model/EntityModel;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFF)V"
+      },
+      "ladysnake/illuminations/mixin/jeb/LivingEntityRendererMixin": {
+        "getRenderLayer": "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;m_7225_(Lnet/minecraft/world/entity/LivingEntity;ZZZ)Lnet/minecraft/client/renderer/RenderType;"
+      },
+      "ladysnake/illuminations/mixin/PlayerEntityMixin": {
+        "tick": "Lnet/minecraft/world/entity/player/Player;m_8119_()V"
+      },
+      "ladysnake/illuminations/mixin/ParticleManagerMixin": {
+        "addBlockBreakParticles": "Lnet/minecraft/client/particle/ParticleEngine;m_107355_(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
+      },
+      "ladysnake/illuminations/mixin/TitleScreenMixin": {
+        "render": "Lnet/minecraft/client/gui/screens/TitleScreen;m_6305_(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V"
+      },
+      "ladysnake/illuminations/mixin/BlockMixin": {
+        "randomDisplayTick": "Lnet/minecraft/world/level/block/Block;m_214162_(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)V"
+      },
+      "ladysnake/illuminations/mixin/ClientWorldMixin": {
+        "addPlayer": "Lnet/minecraft/client/multiplayer/ClientLevel;m_104630_(ILnet/minecraft/client/player/AbstractClientPlayer;)V",
+        "Lnet/minecraft/world/biome/Biome;getParticleConfig()Ljava/util/Optional;": "Lnet/minecraft/world/level/biome/Biome;m_47562_()Ljava/util/Optional;",
+        "randomBlockDisplayTick": "Lnet/minecraft/client/multiplayer/ClientLevel;m_233612_(IIIILnet/minecraft/util/RandomSource;Lnet/minecraft/world/level/block/Block;Lnet/minecraft/core/BlockPos$MutableBlockPos;)V"
+      },
+      "ladysnake/illuminations/mixin/LivingEntityMixin": {
+        "onDeath": "Lnet/minecraft/world/entity/LivingEntity;m_6667_(Lnet/minecraft/world/damagesource/DamageSource;)V"
+      }
+    }
+  }
+}
