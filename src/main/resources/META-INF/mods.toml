@@ -15,20 +15,20 @@ description = "Fireflies, other illuminations to make your world more enjoyable 
 [[dependencies.illuminations]]
 modId = "forge"
 mandatory = true
-versionRange = "[41,)"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.illuminations]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19,)"
+versionRange = "[1.20.1,1.20.2)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.illuminations]]
 modId = "cloth_config"
 mandatory = false
-versionRange = "[7.0,)"
+versionRange = "[11.1.+,)"
 ordering = "NONE"
 side = "BOTH"

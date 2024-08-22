@@ -1,5 +1,5 @@
 plugins {
-    id "dev.architectury.loom" version "1.3-SNAPSHOT"
+    id "dev.architectury.loom" version "1.5-SNAPSHOT"
     id "maven-publish"
 }
 
@@ -59,7 +59,7 @@ dependencies {
     // to add your own mappings here (how about
     // mojmap layered with parchment, for example?)
     mappings loom.officialMojangMappings()
-    modApi "me.shedaniel.cloth:cloth-config-forge:8.3.115"
+    modApi "me.shedaniel.cloth:cloth-config-forge:11.1.118"
     // uncomment this if you want to use yarn mappings
     // mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 
