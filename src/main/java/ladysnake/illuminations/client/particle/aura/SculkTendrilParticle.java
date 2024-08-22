@@ -15,6 +15,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class SculkTendrilParticle extends TextureSheetParticle {
@@ -42,7 +43,7 @@ public class SculkTendrilParticle extends TextureSheetParticle {
 
         for(int k = 0; k < 4; ++k) {
             Vector3f Vec3f2 = Vec3fs[k];
-            Vec3f2.transform(new Quaternion(0.0F, this.roll, 0.0F, true));
+            Vec3f2.rotate(new Quaternionf(0.0F, this.roll, 0.0F, 0.0F));
             Vec3f2.mul(j);
             Vec3f2.add(f, g, h);
         }

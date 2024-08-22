@@ -17,6 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class ConfettiParticle extends TextureSheetParticle {
@@ -74,7 +75,7 @@ public class ConfettiParticle extends TextureSheetParticle {
 
             for(k = 0; k < 4; ++k) {
                 Vec3f2 = Vec3fs[k];
-                Vec3f2.transform(new Quaternion(this.rotationX, this.rotationY, this.rotationZ, true));
+                Vec3f2.rotate(new Quaternionf(this.rotationX, this.rotationY, this.rotationZ, 0.0F));
                 Vec3f2.mul(j);
                 Vec3f2.add(f, g, h);
             }
@@ -84,7 +85,7 @@ public class ConfettiParticle extends TextureSheetParticle {
 
             for(k = 0; k < 4; ++k) {
                 Vec3f2 = Vec3fs[k];
-                Vec3f2.transform(new Quaternion(this.rotationX, this.rotationY, this.rotationZ, true));
+                Vec3f2.rotate(new Quaternionf(this.rotationX, this.rotationY, this.rotationZ, 0.0F));
                 Vec3f2.mul(j);
                 Vec3f2.add(f, g + this.groundOffset, h);
             }

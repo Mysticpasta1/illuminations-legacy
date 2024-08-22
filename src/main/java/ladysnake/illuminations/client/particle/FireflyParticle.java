@@ -89,7 +89,7 @@ public class FireflyParticle extends TextureSheetParticle {
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-        Vec3f.transform(quaternion2);
+        Vec3f.rotate(quaternion2);
         Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float j = this.getQuadSize(tickDelta);
 

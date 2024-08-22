@@ -71,7 +71,7 @@ public class GhostlyAuraParticle extends TextureSheetParticle {
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-        Vec3f.transform(quaternion2);
+        Vec3f.rotate(quaternion2);
         Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float j = this.getQuadSize(tickDelta);
 
@@ -80,7 +80,7 @@ public class GhostlyAuraParticle extends TextureSheetParticle {
             Vector3f Vec3f2 = Vec3fs[k];
             minV = Vec3f2.y();
             Vec3f2.set(Vec3f2.x(), 0.0F, Vec3f2.z());
-            Vec3f2.transform(quaternion2);
+            Vec3f2.rotate(quaternion2);
             Vec3f2.set(Vec3f2.x() / (1.0F + this.offsetY * this.offsetY), minV * this.offsetY, Vec3f2.z() / (1.0F + this.offsetY * this.offsetY));
             Vec3f2.mul(j);
             Vec3f2.add(f, g, h);

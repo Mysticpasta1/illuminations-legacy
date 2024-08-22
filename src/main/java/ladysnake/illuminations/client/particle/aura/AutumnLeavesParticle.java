@@ -58,13 +58,13 @@ public class AutumnLeavesParticle extends TextureSheetParticle {
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
-        Vec3f.transform(quaternion2);
+        Vec3f.rotate(quaternion2);
         Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float j = this.getQuadSize(tickDelta);
 
         for(int k = 0; k < 4; ++k) {
             Vector3f Vec3f2 = Vec3fs[k];
-            Vec3f2.transform(quaternion2);
+            Vec3f2.rotate(quaternion2);
             Vec3f2.mul(j);
             Vec3f2.add(f, g, h);
         }
