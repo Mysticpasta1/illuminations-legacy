@@ -1,8 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -20,6 +19,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class EmberParticle extends TextureSheetParticle {
     protected static final float BLINK_STEP = 0.2F;
@@ -53,13 +54,13 @@ public class EmberParticle extends TextureSheetParticle {
         float f = (float)(Mth.lerp((double)tickDelta, this.xo, this.x) - vec3d.x());
         float g = (float)(Mth.lerp((double)tickDelta, this.yo, this.y) - vec3d.y());
         float h = (float)(Mth.lerp((double)tickDelta, this.zo, this.z) - vec3d.z());
-        Quaternion quaternion2;
+        Quaternionf quaternion2;
         if (this.roll == 0.0F) {
             quaternion2 = camera.rotation();
         } else {
-            quaternion2 = new Quaternion(camera.rotation());
+            quaternion2 = new Quaternionf(camera.rotation());
             float i = Mth.lerp(tickDelta, this.oRoll, this.roll);
-            quaternion2.mul(Vector3f.ZP.rotation(i));
+            quaternion2.mul(Axis.ZP.rotation(i));
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
@@ -92,7 +93,7 @@ public class EmberParticle extends TextureSheetParticle {
         this.zo = this.z;
 
         for(int i = 0; i < 5; ++i) {
-            Block blockUnder = this.level.getBlockState(new BlockPos(this.x, this.y - (double)i, this.z)).getBlock();
+            Block blockUnder = this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y - (double)i), (int) this.z)).getBlock();
             if (blockUnder instanceof CampfireBlock || blockUnder instanceof FireBlock) {
                 this.yd += (double)(0.01F / (float)(i + 1));
                 break;
@@ -127,7 +128,7 @@ public class EmberParticle extends TextureSheetParticle {
         targetVector = targetVector.scale(0.1 / length);
         this.xd = 0.3 * this.xd + 0.1 * targetVector.x * 3.0;
         this.zd = 0.3 * this.zd + 0.1 * targetVector.z * 3.0;
-        if (!(new BlockPos(this.x, this.y, this.z)).equals(this.getTargetPosition())) {
+        if (!(new BlockPos((int) this.x, (int) this.y, (int) this.z)).equals(this.getTargetPosition())) {
             this.move(this.xd, this.yd, this.zd);
         }
 
@@ -137,8 +138,8 @@ public class EmberParticle extends TextureSheetParticle {
         double groundLevel = 0.0;
 
         for(int i = 0; i < 20; ++i) {
-            BlockState checkedBlock = this.level.getBlockState(new BlockPos(this.x, this.y - (double)i, this.z));
-            if (!checkedBlock.getBlock().isPossibleToRespawnInThis()) {
+            BlockState checkedBlock = this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y - (double)i), (int) this.z));
+            if (!checkedBlock.getBlock().isPossibleToRespawnInThis(checkedBlock)) {
                 groundLevel = this.y - (double)i;
             }
 
@@ -154,7 +155,7 @@ public class EmberParticle extends TextureSheetParticle {
     }
 
     public BlockPos getTargetPosition() {
-        return new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+        return new BlockPos((int) this.xTarget, (int) this.yTarget, (int) this.zTarget);
     }
 
     @OnlyIn(Dist.CLIENT)

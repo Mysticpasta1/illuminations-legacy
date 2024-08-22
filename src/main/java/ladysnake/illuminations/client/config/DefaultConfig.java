@@ -2,22 +2,12 @@ package ladysnake.illuminations.client.config;
 
 import com.google.common.collect.ImmutableMap;
 import ladysnake.illuminations.client.data.AuraSettings;
-import ladysnake.illuminations.client.data.BiomeSettings;
 import ladysnake.illuminations.client.enums.EyesInTheDarkSpawnRate;
 import ladysnake.illuminations.client.enums.FireflySpawnRate;
 import ladysnake.illuminations.client.enums.GlowwormSpawnRate;
 import ladysnake.illuminations.client.enums.HalloweenFeatures;
 import ladysnake.illuminations.client.enums.PlanktonSpawnRate;
 import ladysnake.illuminations.client.enums.WillOWispsSpawnRate;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-
-import java.util.HashMap;
 
 public final class DefaultConfig {
     public static HalloweenFeatures HALLOWEEN_FEATURES;

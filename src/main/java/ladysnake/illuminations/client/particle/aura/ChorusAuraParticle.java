@@ -42,7 +42,7 @@ public class ChorusAuraParticle extends ChorusPetalParticle {
         }
 
         this.oRoll = this.roll;
-        if (this.onGround || this.level.getFluidState(new BlockPos(this.x, this.y, this.z)).is(FluidTags.WATER)) {
+        if (this.onGround || this.level.getFluidState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).is(FluidTags.WATER)) {
             this.xd = 0.0;
             this.yd = 0.0;
             this.zd = 0.0;

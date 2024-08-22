@@ -57,7 +57,7 @@ public class ShadowbringerParticle extends ChorusPetalParticle {
         }
 
         this.oRoll = this.roll;
-        if (this.onGround || this.level.getFluidState(new BlockPos(this.x, this.y, this.z)).getType() != Fluids.EMPTY) {
+        if (this.onGround || this.level.getFluidState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).getType() != Fluids.EMPTY) {
             this.yd *= 0.95;
         }
 

@@ -17,9 +17,9 @@ public abstract class ChorusFlowerBlockMixin extends BlockMixin {
     }
 
     protected void illuminations$randomDisplayTick(BlockState state, Level world, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        for(int i = 0; i < (6 - (Integer)state.getValue(ChorusFlowerBlock.AGE)) * Config.getChorusPetalsSpawnMultiplier(); ++i) {
+        for(int i = 0; i < (6 - state.getValue(ChorusFlowerBlock.AGE)) * Config.getChorusPetalsSpawnMultiplier(); ++i) {
             if (Illuminations.CHORUS_PETAL.isPresent()) {
-                world.addParticle((ParticleOptions)Illuminations.CHORUS_PETAL.get(), true, (double)pos.getX() + 0.5 + random.nextGaussian() * 5.0, (double)pos.getY() + 0.5 + random.nextGaussian() * 5.0, (double)pos.getZ() + 0.5 + random.nextGaussian() * 5.0, 0.0, 0.0, 0.0);
+                world.addParticle(Illuminations.CHORUS_PETAL.get(), true, (double)pos.getX() + 0.5 + random.nextGaussian() * 5.0, (double)pos.getY() + 0.5 + random.nextGaussian() * 5.0, (double)pos.getZ() + 0.5 + random.nextGaussian() * 5.0, 0.0, 0.0, 0.0);
             }
         }
 

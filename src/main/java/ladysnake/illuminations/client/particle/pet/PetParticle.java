@@ -1,8 +1,7 @@
 package ladysnake.illuminations.client.particle.pet;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import java.util.Random;
 import ladysnake.illuminations.client.particle.FireflyParticle;
 import net.minecraft.client.Camera;
@@ -18,6 +17,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class PetParticle extends FireflyParticle {
     private static final Random RANDOM = new Random();
@@ -44,13 +45,13 @@ public class PetParticle extends FireflyParticle {
         float f = (float)(Mth.lerp((double)tickDelta, this.xo, this.x) - vec3d.x());
         float g = (float)(Mth.lerp((double)tickDelta, this.yo, this.y) - vec3d.y());
         float h = (float)(Mth.lerp((double)tickDelta, this.zo, this.z) - vec3d.z());
-        Quaternion quaternion2;
+        Quaternionf quaternion2;
         if (this.roll == 0.0F) {
             quaternion2 = camera.rotation();
         } else {
-            quaternion2 = new Quaternion(camera.rotation());
+            quaternion2 = new Quaternionf(camera.rotation());
             float i = Mth.lerp(tickDelta, this.oRoll, this.roll);
-            quaternion2.mul(Vector3f.ZP.rotation(i));
+            quaternion2.mul(Axis.ZP.rotation(i));
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);

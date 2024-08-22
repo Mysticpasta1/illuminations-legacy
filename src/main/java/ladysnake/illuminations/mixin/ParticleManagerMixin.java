@@ -1,6 +1,5 @@
 package ladysnake.illuminations.mixin;
 
-import com.mojang.math.Vector4f;
 import ladysnake.illuminations.client.Illuminations;
 import ladysnake.illuminations.client.config.Config;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -39,9 +38,9 @@ public abstract class ParticleManagerMixin {
     )
     public void addBlockBreakParticles(BlockPos pos, BlockState state, CallbackInfo ci) {
         if (state.getBlock() == Blocks.CHORUS_FLOWER) {
-            for(int i = 0; i < (6 - (Integer)state.getValue(ChorusFlowerBlock.AGE)) * 10 * Config.getChorusPetalsSpawnMultiplier(); ++i) {
+            for(int i = 0; i < (6 - state.getValue(ChorusFlowerBlock.AGE)) * 10 * Config.getChorusPetalsSpawnMultiplier(); ++i) {
                 if (Illuminations.CHORUS_PETAL.isPresent()) {
-                    this.createParticle((ParticleOptions)Illuminations.CHORUS_PETAL.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, this.random.nextGaussian() / 10.0, this.random.nextGaussian() / 10.0, this.random.nextGaussian() / 10.0);
+                    this.createParticle(Illuminations.CHORUS_PETAL.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, this.random.nextGaussian() / 10.0, this.random.nextGaussian() / 10.0, this.random.nextGaussian() / 10.0);
                 }
             }
         }

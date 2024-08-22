@@ -1,10 +1,10 @@
 package ladysnake.illuminations.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import com.mojang.math.Axis;
 import ladysnake.illuminations.client.config.Config;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -21,6 +21,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class PlanktonParticle extends TextureSheetParticle {
     private static final float BLINK_STEP = 0.01F;
@@ -55,13 +57,13 @@ public class PlanktonParticle extends TextureSheetParticle {
         float f = (float)(Mth.lerp((double)tickDelta, this.xo, this.x) - vec3d.x());
         float g = (float)(Mth.lerp((double)tickDelta, this.yo, this.y) - vec3d.y());
         float h = (float)(Mth.lerp((double)tickDelta, this.zo, this.z) - vec3d.z());
-        Quaternion quaternion2;
+        Quaternionf quaternion2;
         if (this.roll == 0.0F) {
             quaternion2 = camera.rotation();
         } else {
-            quaternion2 = new Quaternion(camera.rotation());
+            quaternion2 = new Quaternionf(camera.rotation());
             float i = Mth.lerp(tickDelta, this.oRoll, this.roll);
-            quaternion2.mul(Vector3f.ZP.rotation(i));
+            quaternion2.mul(Axis.ZP.rotation(i));
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
@@ -119,7 +121,7 @@ public class PlanktonParticle extends TextureSheetParticle {
         Vec3 targetVector = new Vec3(this.xTarget - this.x, this.yTarget - this.y, this.zTarget - this.z);
         double length = targetVector.length();
         targetVector = targetVector.scale(0.001 / length);
-        if (!this.level.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getFluidState().is(FluidTags.WATER)) {
+        if (!this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y - 0.1), (int) this.z)).getFluidState().is(FluidTags.WATER)) {
             this.xd = 0.9 * this.xd + 0.1 * targetVector.x;
             this.yd = 0.05;
             this.zd = 0.9 * this.zd + 0.1 * targetVector.z;
@@ -129,7 +131,7 @@ public class PlanktonParticle extends TextureSheetParticle {
             this.zd = 0.9 * this.zd + 0.1 * targetVector.z;
         }
 
-        if (!(new BlockPos(this.x, this.y, this.z)).equals(this.getTargetPosition())) {
+        if (!(new BlockPos((int) this.x, (int) this.y, (int) this.z)).equals(this.getTargetPosition())) {
             this.move(this.xd, this.yd, this.zd);
         }
 
@@ -139,7 +141,7 @@ public class PlanktonParticle extends TextureSheetParticle {
         double groundLevel = 0.0;
 
         for(int i = 0; i < 20; ++i) {
-            BlockState checkedBlock = this.level.getBlockState(new BlockPos(this.x, this.y - (double)i, this.z));
+            BlockState checkedBlock = this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y - (double)i), (int) this.z));
             if (checkedBlock.getFluidState().is(FluidTags.WATER)) {
                 groundLevel = this.y - (double)i;
             }
@@ -152,7 +154,7 @@ public class PlanktonParticle extends TextureSheetParticle {
         this.xTarget = this.x + this.random.nextGaussian() * 10.0;
         this.yTarget = Math.max(this.y + this.random.nextGaussian() * 2.0, groundLevel);
         this.zTarget = this.z + this.random.nextGaussian() * 10.0;
-        BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+        BlockPos targetPos = new BlockPos((int) this.xTarget, (int) this.yTarget, (int) this.zTarget);
         if (this.level.getBlockState(targetPos).isCollisionShapeFullBlock(this.level, targetPos) && this.level.getBlockState(targetPos).isRedstoneConductor(this.level, targetPos)) {
             ++this.yTarget;
         }
@@ -161,7 +163,7 @@ public class PlanktonParticle extends TextureSheetParticle {
     }
 
     public BlockPos getTargetPosition() {
-        return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
+        return new BlockPos((int) this.xTarget, (int) (this.yTarget + 0.5), (int) this.zTarget);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -2,7 +2,7 @@ package ladysnake.illuminations.client.particle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import java.util.List;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -44,8 +44,8 @@ public class PoltergeistParticle extends WillOWispParticle {
         float h = (float)(Mth.lerp((double)tickDelta, this.zo, this.z) - vec3d.z());
         PoseStack matrixStack = new PoseStack();
         matrixStack.translate((double)f, (double)g, (double)h);
-        matrixStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(g, this.prevYaw, this.yaw) - 180.0F));
-        matrixStack.mulPose(Vector3f.XP.rotationDegrees(Mth.lerp(g, this.prevPitch, this.pitch)));
+        matrixStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(g, this.prevYaw, this.yaw) - 180.0F));
+        matrixStack.mulPose(Axis.XP.rotationDegrees(Mth.lerp(g, this.prevPitch, this.pitch)));
         matrixStack.scale(0.5F, -0.5F, 0.5F);
         matrixStack.translate(0.0, -1.0, 0.0);
         MultiBufferSource.BufferSource immediate = Minecraft.getInstance().renderBuffers().bufferSource();
@@ -78,8 +78,8 @@ public class PoltergeistParticle extends WillOWispParticle {
                 this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SKELETON_SKULL.defaultBlockState()), this.x + this.random.nextGaussian() / 10.0, this.y + this.random.nextGaussian() / 10.0, this.z + this.random.nextGaussian() / 10.0, this.random.nextGaussian() / 20.0, this.random.nextGaussian() / 20.0, this.random.nextGaussian() / 20.0);
             }
 
-            this.level.playLocalSound(new BlockPos(this.x, this.y, this.z), SoundEvents.VEX_DEATH, SoundSource.AMBIENT, 1.0F, 0.8F, true);
-            this.level.playLocalSound(new BlockPos(this.x, this.y, this.z), SoundEvents.SKELETON_DEATH, SoundSource.AMBIENT, 1.0F, 1.0F, true);
+            this.level.playLocalSound(new BlockPos((int) this.x, (int) this.y, (int) this.z), SoundEvents.VEX_DEATH, SoundSource.AMBIENT, 1.0F, 0.8F, true);
+            this.level.playLocalSound(new BlockPos((int) this.x, (int) this.y, (int) this.z), SoundEvents.SKELETON_DEATH, SoundSource.AMBIENT, 1.0F, 1.0F, true);
             this.remove();
         }
 
@@ -101,15 +101,15 @@ public class PoltergeistParticle extends WillOWispParticle {
         this.yaw = (float)(Mth.atan2(vec3d.x, vec3d.z) * 57.2957763671875);
         this.pitch = (float)(Mth.atan2(vec3d.y, (double)f) * 57.2957763671875);
         this.level.addParticle(new WispTrailParticleEffect(this.rCol, this.gCol, this.bCol, this.redEvolution, this.greenEvolution, this.blueEvolution), this.x + this.random.nextGaussian() / 15.0, this.y + this.random.nextGaussian() / 15.0, this.z + this.random.nextGaussian() / 15.0, 0.0, 0.0, 0.0);
-        if (!(new BlockPos(this.x, this.y, this.z)).equals(this.getTargetPosition())) {
+        if (!(new BlockPos((int) this.x, (int) this.y, (int) this.z)).equals(this.getTargetPosition())) {
             this.move(this.xd, this.yd, this.zd);
         }
 
         if (this.random.nextInt(20) == 0) {
-            this.level.playLocalSound(new BlockPos(this.x, this.y, this.z), SoundEvents.VEX_AMBIENT, SoundSource.AMBIENT, 1.0F, 0.8F, true);
+            this.level.playLocalSound(new BlockPos((int) this.x, (int) this.y, (int) this.z), SoundEvents.VEX_AMBIENT, SoundSource.AMBIENT, 1.0F, 0.8F, true);
         }
 
-        BlockPos pos = new BlockPos(this.x, this.y, this.z);
+        BlockPos pos = new BlockPos((int) this.x, (int) this.y, (int) this.z);
         if (!this.level.getBlockState(pos).isAir()) {
             if (this.timeInSolid > -1) {
                 ++this.timeInSolid;
@@ -151,14 +151,14 @@ public class PoltergeistParticle extends WillOWispParticle {
     }
 
     public BlockPos getTargetPosition() {
-        return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
+        return new BlockPos((int) this.xTarget, (int) (this.yTarget + 0.5), (int)  this.zTarget);
     }
 
     private void selectBlockTarget() {
         this.xTarget = this.x + this.random.nextGaussian() * 10.0;
         this.yTarget = this.y + this.random.nextGaussian() * 10.0;
         this.zTarget = this.z + this.random.nextGaussian() * 10.0;
-        BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+        BlockPos targetPos = new BlockPos((int) this.xTarget, (int) this.yTarget, (int) this.zTarget);
         if (this.level.getBlockState(targetPos).isCollisionShapeFullBlock(this.level, targetPos)) {
             this.targetChangeCooldown = 0;
         } else {

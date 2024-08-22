@@ -34,7 +34,6 @@ import ladysnake.illuminations.client.render.entity.model.hat.WreathModel;
 import ladysnake.illuminations.client.render.entity.model.pet.LanternModel;
 import ladysnake.illuminations.client.render.entity.model.pet.PrideHeartModel;
 import ladysnake.illuminations.client.render.entity.model.pet.WillOWispModel;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -67,95 +66,95 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        event.register((ParticleType)Illuminations.FIREFLY.get(), FireflyParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.GLOWWORM.get(), GlowwormParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.PLANKTON.get(), PlanktonParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.EYES.get(), EyesParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.CHORUS_PETAL.get(), ChorusPetalParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.WILL_O_WISP.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.FIREFLY.get(), FireflyParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.GLOWWORM.get(), GlowwormParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.PLANKTON.get(), PlanktonParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.EYES.get(), EyesParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.CHORUS_PETAL.get(), ChorusPetalParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.WILL_O_WISP.get(), (fabricSpriteProvider) -> {
             return new WillOWispParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/will_o_wisp.png"), 1.0F, 1.0F, 1.0F, -0.1F, -0.01F, 0.0F);
         });
-        event.register((ParticleType)Illuminations.WISP_TRAIL.get(), WispTrailParticle.Factory::new);
-        event.register((ParticleType)Illuminations.PUMPKIN_SPIRIT.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.WISP_TRAIL.get(), WispTrailParticle.Factory::new);
+        event.registerSpriteSet(Illuminations.PUMPKIN_SPIRIT.get(), (fabricSpriteProvider) -> {
             return new PumpkinSpiritParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/pumpkin_spirit.png"), 1.0F, 0.95F, 0.0F, 0.0F, -0.03F, 0.0F);
         });
-        event.register((ParticleType)Illuminations.POLTERGEIST.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.POLTERGEIST.get(), (fabricSpriteProvider) -> {
             return new PoltergeistParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/poltergeist.png"), 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F);
         });
-        event.register((ParticleType)Illuminations.PRISMARINE_CRYSTAL.get(), PrismarineCrystalParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.TWILIGHT_AURA.get(), TwilightFireflyParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.GHOSTLY_AURA.get(), GhostlyAuraParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.CHORUS_AURA.get(), ChorusAuraParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.AUTUMN_LEAVES_AURA.get(), AutumnLeavesParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.SCULK_TENDRIL_AURA.get(), SculkTendrilParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.SHADOWBRINGER_AURA.get(), ShadowbringerParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.GOLDENROD_AURA.get(), GoldenrodAuraParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.CONFETTI_AURA.get(), ConfettiParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.PRISMATIC_CONFETTI_AURA.get(), PrismaticConfettiParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.PRISMARINE_AURA.get(), PrismarineAuraParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.PRISMARINE_CRYSTAL.get(), PrismarineCrystalParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.TWILIGHT_AURA.get(), TwilightFireflyParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.GHOSTLY_AURA.get(), GhostlyAuraParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.CHORUS_AURA.get(), ChorusAuraParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.AUTUMN_LEAVES_AURA.get(), AutumnLeavesParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.SCULK_TENDRIL_AURA.get(), SculkTendrilParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.SHADOWBRINGER_AURA.get(), ShadowbringerParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.GOLDENROD_AURA.get(), GoldenrodAuraParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.CONFETTI_AURA.get(), ConfettiParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.PRISMATIC_CONFETTI_AURA.get(), PrismaticConfettiParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.PRISMARINE_AURA.get(), PrismarineAuraParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.GAY_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.GAY_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/gay_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.TRANS_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.TRANS_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/trans_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.LESBIAN_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.LESBIAN_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/lesbian_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.BI_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.BI_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/bi_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.ACE_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.ACE_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/ace_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.NB_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.NB_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/nb_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.INTERSEX_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.INTERSEX_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/intersex_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.ARO_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.ARO_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/aro_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.PAN_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.PAN_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/pan_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.AGENDER_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.AGENDER_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/agender_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.GENDERFLUID_PRIDE_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.GENDERFLUID_PRIDE_PET.get(), (fabricSpriteProvider) -> {
             return new PrideHeartParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/genderfluid_pride_heart.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.WILL_O_WISP_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.WILL_O_WISP_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/will_o_wisp.png"), 1.0F, 1.0F, 1.0F, -0.1F, -0.01F, 0.0F);
         });
-        event.register((ParticleType)Illuminations.GOLDEN_WILL_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.GOLDEN_WILL_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/golden_will.png"), 1.0F, 0.3F, 1.0F, -0.05F, -0.01F, 0.0F);
         });
-        event.register((ParticleType)Illuminations.FOUNDING_SKULL_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.FOUNDING_SKULL_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/founding_skull.png"), 1.0F, 0.0F, 0.25F, -0.03F, 0.0F, -0.01F);
         });
-        event.register((ParticleType)Illuminations.DISSOLUTION_WISP_PET.get(), PetParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.JACKO_PET.get(), JackoParticle.DefaultFactory::new);
-        event.register((ParticleType)Illuminations.PUMPKIN_SPIRIT_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.DISSOLUTION_WISP_PET.get(), PetParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.JACKO_PET.get(), JackoParticle.DefaultFactory::new);
+        event.registerSpriteSet(Illuminations.PUMPKIN_SPIRIT_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/pumpkin_spirit.png"), 1.0F, 0.95F, 0.0F, 0.0F, -0.03F, 0.0F);
         });
-        event.register((ParticleType)Illuminations.POLTERGEIST_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.POLTERGEIST_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerWispParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/poltergeist.png"), 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F);
         });
-        event.register((ParticleType)Illuminations.LANTERN_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.LANTERN_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/lantern.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.SOUL_LANTERN_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.SOUL_LANTERN_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/soul_lantern.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.CRYING_LANTERN_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.CRYING_LANTERN_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/crying_lantern.png"), 1.0F, 1.0F, 1.0F);
         });
-        event.register((ParticleType)Illuminations.SOOTHING_LANTERN_PET.get(), (fabricSpriteProvider) -> {
+        event.registerSpriteSet(Illuminations.SOOTHING_LANTERN_PET.get(), (fabricSpriteProvider) -> {
             return new PlayerLanternParticle.DefaultFactory(fabricSpriteProvider, new ResourceLocation("illuminations", "textures/entity/soothing_lantern.png"), 1.0F, 1.0F, 1.0F);
         });
     }

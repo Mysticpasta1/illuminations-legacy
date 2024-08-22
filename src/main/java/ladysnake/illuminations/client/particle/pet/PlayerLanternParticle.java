@@ -2,7 +2,7 @@ package ladysnake.illuminations.client.particle.pet;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import ladysnake.illuminations.client.render.GlowyRenderLayer;
 import ladysnake.illuminations.client.render.entity.model.pet.LanternModel;
 import net.minecraft.client.Camera;
@@ -65,8 +65,8 @@ public class PlayerLanternParticle extends Particle {
         float h = (float)(Mth.lerp((double)tickDelta, this.zo, this.z) - vec3d.z());
         PoseStack matrixStack = new PoseStack();
         matrixStack.translate((double)f, (double)g, (double)h);
-        matrixStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(g, this.prevYaw, this.yaw) - 180.0F));
-        matrixStack.mulPose(Vector3f.XP.rotationDegrees(Mth.lerp(g, this.prevPitch, this.pitch)));
+        matrixStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(g, this.prevYaw, this.yaw) - 180.0F));
+        matrixStack.mulPose(Axis.XP.rotationDegrees(Mth.lerp(g, this.prevPitch, this.pitch)));
         matrixStack.scale(0.5F, -0.5F, 0.5F);
         matrixStack.translate(0.0, -1.0, 0.0);
         MultiBufferSource.BufferSource immediate = Minecraft.getInstance().renderBuffers().bufferSource();

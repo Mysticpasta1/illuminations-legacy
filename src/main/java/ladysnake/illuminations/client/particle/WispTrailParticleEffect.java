@@ -12,6 +12,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class WispTrailParticleEffect implements ParticleOptions {
     public static final Codec<WispTrailParticleEffect> CODEC = RecordCodecBuilder.create((instance) -> {
@@ -77,7 +78,7 @@ public class WispTrailParticleEffect implements ParticleOptions {
     }
 
     public String writeToString() {
-        return String.format(Locale.ROOT, "%s %.2f %.2f %.2f %.2f %.2f %.2f", Registry.PARTICLE_TYPE.getKey(this.getType()), this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution);
+        return String.format(Locale.ROOT, "%s %.2f %.2f %.2f %.2f %.2f %.2f", ForgeRegistries.PARTICLE_TYPES.getKey(this.getType()), this.red, this.green, this.blue, this.redEvolution, this.greenEvolution, this.blueEvolution);
     }
 
     public ParticleType<WispTrailParticleEffect> getType() {

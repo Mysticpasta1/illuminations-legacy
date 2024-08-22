@@ -1,8 +1,6 @@
 package ladysnake.illuminations.client.particle.aura;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import net.minecraft.client.Camera;
@@ -19,6 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Vector3f;
 
 public class ConfettiParticle extends TextureSheetParticle {
     private static final Random RANDOM = new Random();
@@ -112,8 +111,8 @@ public class ConfettiParticle extends TextureSheetParticle {
         this.zo = this.z;
         if (this.age++ >= this.lifetime) {
             this.remove();
-        } else if (this.level.getFluidState(new BlockPos(this.x, this.y + 0.2, this.z)).isEmpty()) {
-            if (this.level.getFluidState(new BlockPos(this.x, this.y - 0.01, this.z)).is(FluidTags.WATER)) {
+        } else if (this.level.getFluidState(new BlockPos((int) this.x, (int) (this.y + 0.2), (int) this.z)).isEmpty()) {
+            if (this.level.getFluidState(new BlockPos((int) this.x, (int) (this.y - 0.01), (int) this.z)).is(FluidTags.WATER)) {
                 this.onGround = true;
                 this.yd = 0.0;
             } else {

@@ -1,8 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import ladysnake.illuminations.client.config.Config;
@@ -22,6 +21,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class EyesParticle extends TextureSheetParticle {
     private static final Random RANDOM = new Random();
@@ -49,13 +50,13 @@ public class EyesParticle extends TextureSheetParticle {
         float f = (float)(Mth.lerp((double)tickDelta, this.xo, this.x) - vec3d.x());
         float g = (float)(Mth.lerp((double)tickDelta, this.yo, this.y) - vec3d.y());
         float h = (float)(Mth.lerp((double)tickDelta, this.zo, this.z) - vec3d.z());
-        Quaternion quaternion2;
+        Quaternionf quaternion2;
         if (this.roll == 0.0F) {
             quaternion2 = camera.rotation();
         } else {
-            quaternion2 = new Quaternion(camera.rotation());
+            quaternion2 = new Quaternionf(camera.rotation());
             float i = Mth.lerp(tickDelta, this.oRoll, this.roll);
-            quaternion2.mul(Vector3f.ZP.rotation(i));
+            quaternion2.mul(Axis.ZP.rotation(i));
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
@@ -110,7 +111,7 @@ public class EyesParticle extends TextureSheetParticle {
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
-        if (this.lifetime > this.age && (this.level.getMaxLocalRawBrightness(new BlockPos(this.x, this.y, this.z)) > 0 || this.level.getNearestPlayer(this.x, this.y, this.z, 5.0, false) != null)) {
+        if (this.lifetime > this.age && (this.level.getMaxLocalRawBrightness(new BlockPos((int) this.x, (int) this.y, (int) this.z)) > 0 || this.level.getNearestPlayer(this.x, this.y, this.z, 5.0, false) != null)) {
             this.lifetime = this.age;
         }
 

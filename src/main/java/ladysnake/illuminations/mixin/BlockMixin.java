@@ -29,7 +29,7 @@ public abstract class BlockMixin {
     protected void illuminations$randomDisplayTick(BlockState state, Level world, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (this.defaultBlockState().getBlock() == Blocks.SEA_LANTERN) {
             for(int i = 0; i < 10; ++i) {
-                BlockPos blockPos = new BlockPos((double)pos.getX() + 0.5 + random.nextGaussian() * 15.0, (double)pos.getY() + 0.5 + random.nextGaussian() * 15.0, (double)pos.getZ() + 0.5 + random.nextGaussian() * 15.0);
+                BlockPos blockPos = new BlockPos((int) ((double)pos.getX() + 0.5 + random.nextGaussian() * 15.0), (int) ((double)pos.getY() + 0.5 + random.nextGaussian() * 15.0), (int) ((double)pos.getZ() + 0.5 + random.nextGaussian() * 15.0));
                 if (world.getBlockState(blockPos).getBlock() == Blocks.WATER && random.nextInt(1 + world.getMaxLocalRawBrightness(blockPos)) == 0 && Illuminations.PRISMARINE_CRYSTAL.isPresent()) {
                     world.addParticle((ParticleOptions)Illuminations.PRISMARINE_CRYSTAL.get(), true, (double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), 0.0, 0.0, 0.0);
                 }

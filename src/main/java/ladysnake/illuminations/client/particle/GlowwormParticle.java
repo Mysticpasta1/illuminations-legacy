@@ -1,8 +1,7 @@
 package ladysnake.illuminations.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import ladysnake.illuminations.client.config.Config;
@@ -19,6 +18,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class GlowwormParticle extends TextureSheetParticle {
     private static final float BLINK_STEP = 0.01F;
@@ -61,13 +62,13 @@ public class GlowwormParticle extends TextureSheetParticle {
         float f = (float)(Mth.lerp((double)tickDelta, this.xo, this.x) - vec3d.x());
         float g = (float)(Mth.lerp((double)tickDelta, this.yo, this.y) - vec3d.y());
         float h = (float)(Mth.lerp((double)tickDelta, this.zo, this.z) - vec3d.z());
-        Quaternion quaternion2;
+        Quaternionf quaternion2;
         if (this.roll == 0.0F) {
             quaternion2 = camera.rotation();
         } else {
-            quaternion2 = new Quaternion(camera.rotation());
+            quaternion2 = new Quaternionf(camera.rotation());
             float i = Mth.lerp(tickDelta, this.oRoll, this.roll);
-            quaternion2.mul(Vector3f.ZP.rotation(i));
+            quaternion2.mul(Axis.ZP.rotation(i));
         }
 
         Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
@@ -109,7 +110,7 @@ public class GlowwormParticle extends TextureSheetParticle {
             }
         }
 
-        if (this.level.getBlockState(new BlockPos(this.x, this.y + 0.5, this.z)).isAir()) {
+        if (this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y + 0.5), (int) this.z)).isAir()) {
             this.onCeiling = false;
         }
 
@@ -134,7 +135,7 @@ public class GlowwormParticle extends TextureSheetParticle {
         Vec3 targetVector = new Vec3(this.xTarget - this.x, this.yTarget - this.y, this.zTarget - this.z);
         double length = targetVector.length();
         targetVector = targetVector.scale(0.1 / length);
-        if (!this.level.getBlockState(new BlockPos(this.x, this.y - 0.1, this.z)).getBlock().isPossibleToRespawnInThis()) {
+        if (!this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y - 0.1), (int) this.z)).getBlock().isPossibleToRespawnInThis(this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y - 0.1), (int) this.z)))) {
             this.xd = 0.9 * this.xd + 0.1 * targetVector.x;
             this.zd = 0.9 * this.zd + 0.1 * targetVector.z;
         } else {
@@ -142,7 +143,7 @@ public class GlowwormParticle extends TextureSheetParticle {
             this.zd = 0.9 * this.zd + 0.1 * targetVector.z;
         }
 
-        if (!(new BlockPos(this.x, this.y, this.z)).equals(this.getTargetPosition())) {
+        if (!(new BlockPos((int) this.x, (int) this.y, (int) this.z)).equals(this.getTargetPosition())) {
             this.move(this.xd, this.yd, this.zd);
         }
 
@@ -151,7 +152,7 @@ public class GlowwormParticle extends TextureSheetParticle {
     private void selectBlockTarget() {
         this.xTarget = this.x + this.random.nextGaussian();
         this.zTarget = this.z + this.random.nextGaussian();
-        new BlockPos(this.xTarget, this.y, this.zTarget);
+        new BlockPos((int) this.xTarget, (int) this.y, (int) this.zTarget);
         this.targetChangeCooldown = this.random.nextInt() % 100;
     }
 
@@ -160,7 +161,7 @@ public class GlowwormParticle extends TextureSheetParticle {
         this.y = (double)((float)Math.ceil(this.y)) - 0.025;
         this.alpha = 0.0F;
 
-        while(this.level.getBlockState(new BlockPos(this.x, this.y + 1.0, this.z)).isAir()) {
+        while(this.level.getBlockState(new BlockPos((int) this.x, (int) (this.y + 1.0), (int) this.z)).isAir()) {
             if (this.y++ > 255.0) {
                 this.remove();
                 break;
@@ -171,7 +172,7 @@ public class GlowwormParticle extends TextureSheetParticle {
     }
 
     public BlockPos getTargetPosition() {
-        return new BlockPos(this.xTarget, this.yTarget + 0.95, this.zTarget);
+        return new BlockPos((int) this.xTarget, (int) (this.yTarget + 0.95), (int) this.zTarget);
     }
 
     @OnlyIn(Dist.CLIENT)

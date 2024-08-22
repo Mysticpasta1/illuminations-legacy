@@ -34,10 +34,10 @@ public abstract class LivingEntityMixin extends Entity {
         at = {@At("RETURN")}
     )
     public void onDeath(DamageSource source, CallbackInfo callbackInfo) {
-        if (this.isInvertedHealAndHarm() && this.random.nextInt(5) == 0 && Illuminations.isNightTime(this.level) && (Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS)) {
-            this.level.playSound((Player)null, this.blockPosition(), SoundEvents.VEX_CHARGE, SoundSource.AMBIENT, 1.0F, 0.8F);
+        if (this.isInvertedHealAndHarm() && this.random.nextInt(5) == 0 && Illuminations.isNightTime(this.level()) && (Config.getHalloweenFeatures() == HalloweenFeatures.ENABLE && LocalDate.now().getMonth() == Month.OCTOBER || Config.getHalloweenFeatures() == HalloweenFeatures.ALWAYS)) {
+            this.level().playSound((Player)null, this.blockPosition(), SoundEvents.VEX_CHARGE, SoundSource.AMBIENT, 1.0F, 0.8F);
             if (Illuminations.POLTERGEIST.isPresent()) {
-                this.level.addParticle((ParticleOptions)Illuminations.POLTERGEIST.get(), true, this.getX() + 0.5, this.getEyeY(), this.getZ(), 0.0, 0.0, 0.0);
+                this.level().addParticle(Illuminations.POLTERGEIST.get(), true, this.getX() + 0.5, this.getEyeY(), this.getZ(), 0.0, 0.0, 0.0);
             }
         }
 

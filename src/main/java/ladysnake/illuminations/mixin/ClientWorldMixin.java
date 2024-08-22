@@ -11,6 +11,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.WritableLevelData;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,8 +37,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientWorldMixin extends Level {
     @Shadow public abstract void addParticle(ParticleOptions arg, double d, double e, double f, double g, double h, double i);
 
-    protected ClientWorldMixin(WritableLevelData properties, ResourceKey<Level> registryRef, Holder<DimensionType> dimension, Supplier<ProfilerFiller> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
-        super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
+    protected ClientWorldMixin(WritableLevelData properties, ResourceKey<Level> resourceKeyLevel, RegistryAccess registryRef, Holder<DimensionType> dimension, Supplier<ProfilerFiller> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
+        super(properties, resourceKeyLevel, registryRef, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
     }
 
     @Inject(
@@ -55,9 +57,9 @@ public abstract class ClientWorldMixin extends Level {
 )}
     )
     private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, RandomSource random, @Coerce Object blockParticle, BlockPos.MutableBlockPos blockPos, CallbackInfo ci) {
-        BlockPos.MutableBlockPos pos = blockPos.offset(this.random.nextGaussian() * 50.0, this.random.nextGaussian() * 25.0, this.random.nextGaussian() * 50.0).mutable();
+        BlockPos.MutableBlockPos pos = blockPos.offset((int) (this.random.nextGaussian() * 50.0), (int) (this.random.nextGaussian() * 25.0), (int) (this.random.nextGaussian() * 50.0)).mutable();
         Holder<Biome> b = this.getBiome(pos);
-        ResourceLocation biome = this.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey((Biome)b.value());
+        ResourceLocation biome = this.registryAccess().registryOrThrow(ForgeRegistries.BIOMES.getRegistryKey()).getKey(b.value());
         this.spawnParticles(pos, (ImmutableSet)Illuminations.ILLUMINATIONS_BIOME_CATEGORIES.get(biome));
         if (Illuminations.ILLUMINATIONS_BIOMES.containsKey(biome)) {
             ImmutableSet<IlluminationData> illuminationDataSet = (ImmutableSet)Illuminations.ILLUMINATIONS_BIOMES.get(biome);
@@ -65,23 +67,23 @@ public abstract class ClientWorldMixin extends Level {
         }
 
         if(Illuminations.FIREFLY_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getFireflySpawnRate().spawnRate && Illuminations.FIREFLY.isPresent()) {
-            this.addParticle((ParticleOptions) Illuminations.FIREFLY.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+            this.addParticle(Illuminations.FIREFLY.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
         }
 
         if(Illuminations.GLOWWORM_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getGlowwormSpawnRate().spawnRate && Illuminations.GLOWWORM.isPresent()) {
-            this.addParticle((ParticleOptions) Illuminations.GLOWWORM.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+            this.addParticle(Illuminations.GLOWWORM.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
         }
 
         if(Illuminations.PLANKTON_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getPlanktonSpawnRate().spawnRate && Illuminations.PLANKTON.isPresent()) {
-            this.addParticle((ParticleOptions) Illuminations.PLANKTON.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+            this.addParticle(Illuminations.PLANKTON.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
         }
 
         if (Illuminations.EYES_LOCATION_PREDICATE.test(this, pos) && random.nextFloat() <= Config.getEyesInTheDarkSpawnRate().spawnRate && Illuminations.EYES.isPresent()) {
-            this.addParticle((ParticleOptions)Illuminations.EYES.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+            this.addParticle(Illuminations.EYES.get(), (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
         }
 
         if (this.getBlockState(pos).getBlock() == Blocks.SOUL_LANTERN && this.getBlockState(pos.offset(0, -1, 0)).is(BlockTags.SOUL_FIRE_BASE_BLOCKS) && random.nextInt(50) == 0 && Illuminations.WILL_O_WISP.isPresent()) {
-            this.addParticle((ParticleOptions)Illuminations.WILL_O_WISP.get(), true, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
+            this.addParticle(Illuminations.WILL_O_WISP.get(), true, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, 0.0, 0.0, 0.0);
         }
 
     }
